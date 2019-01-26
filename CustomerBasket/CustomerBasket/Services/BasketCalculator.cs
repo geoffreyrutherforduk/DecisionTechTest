@@ -8,6 +8,8 @@ namespace CustomerBasket.Services
     {
         private IProductDiscount[] _productDiscounts;
 
+        // Inject the discounts into the constructor so the discounts are more flexible
+        // to apply or remove. Also, calculator can be unit tested independently of the discounts.
         public BasketCalculator(params IProductDiscount[] productDiscounts)
         {
             _productDiscounts = productDiscounts ?? new IProductDiscount[0];

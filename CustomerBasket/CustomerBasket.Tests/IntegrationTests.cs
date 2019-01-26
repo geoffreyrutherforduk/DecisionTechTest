@@ -9,6 +9,8 @@ using System.Text;
 
 namespace CustomerBasket.Tests
 {
+    // Integration tests used to test the basket calculator with the discounts applied.
+    // Tests all scenarios specified in the test exercise.
     [TestFixture]
     public class IntegrationTests
     {

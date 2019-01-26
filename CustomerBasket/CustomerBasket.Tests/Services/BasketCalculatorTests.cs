@@ -9,6 +9,10 @@ using System.Text;
 
 namespace CustomerBasket.Tests.Services
 {
+    // Basket Calculator tests. Only testing the Basket Calculator without the discounts.
+    // This is done simply by not injecting them into the constructor, alternatively the 
+    // discounts could've been mocked by a library like Moq, but this approach was simpler
+    // and achieves the same result.
     [TestFixture]
     public class BasketCalculatorTests
     {

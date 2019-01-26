@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace CustomerBasket.Services
 {
+    // A wrapper class around a dictionary containing products that are added.
     public class Basket
     {
         public struct BasketProduct
@@ -14,7 +15,12 @@ namespace CustomerBasket.Services
             public decimal ProductPrice { get; set; }
         }
 
+        // Products are stored based on their product Id and store the product price and quantity added.
         private Dictionary<int, BasketProduct> _products = new Dictionary<int, BasketProduct>();
+
+        // Products can also be retrieved by their discount tag which maps to the product Id.
+        // Ideally a tag should map to a collection of product Ids rather than a single Id, however this
+        // was changed to singular for simplicity of the task.
         private Dictionary<DiscountTag, int> _productDiscountItems = new Dictionary<DiscountTag, int>();
 
         public void AddToBasket(Product product, int quantity = 1)
