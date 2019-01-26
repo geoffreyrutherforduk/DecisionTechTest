@@ -15,10 +15,12 @@ namespace CustomerBasket.Tests.Services
         private Product _testButter;
         private Product _testMilk;
         private Product _testBread;
+        private BasketCalculator _basketCalculator;
 
         [SetUp]
         public void Setup()
         {
+            _basketCalculator = new BasketCalculator();
             _testButter = new Product
             {
                 Id = 1,
@@ -45,9 +47,7 @@ namespace CustomerBasket.Tests.Services
         [Test]
         public void Null_Basket_Returns_0()
         {
-            var basketCalculator = new BasketCalculator();
-
-            var cost = basketCalculator.GetCostOfBasket(null);
+            var cost = _basketCalculator.GetCostOfBasket(null);
 
             cost.Should().Be(0);
         }
@@ -56,9 +56,8 @@ namespace CustomerBasket.Tests.Services
         public void Empty_Basket_Returns_0()
         {
             var basket = new Basket();
-            var basketCalculator = new BasketCalculator();
 
-            var cost = basketCalculator.GetCostOfBasket(basket);
+            var cost = _basketCalculator.GetCostOfBasket(basket);
 
             cost.Should().Be(0);
         }
@@ -69,9 +68,7 @@ namespace CustomerBasket.Tests.Services
             var basket = new Basket();
             basket.AddToBasket(_testButter);
 
-            var basketCalculator = new BasketCalculator();
-
-            var cost = basketCalculator.GetCostOfBasket(basket);
+            var cost = _basketCalculator.GetCostOfBasket(basket);
 
             cost.Should().Be(0.80m);
         }
@@ -84,9 +81,7 @@ namespace CustomerBasket.Tests.Services
             basket.AddToBasket(_testBread);
             basket.AddToBasket(_testBread, 1);
 
-            var basketCalculator = new BasketCalculator();
-
-            var cost = basketCalculator.GetCostOfBasket(basket);
+            var cost = _basketCalculator.GetCostOfBasket(basket);
 
             cost.Should().Be(6.0m);
         }
@@ -101,9 +96,8 @@ namespace CustomerBasket.Tests.Services
             basket.AddToBasket(_testButter, 2);
             basket.AddToBasket(_testMilk, 3);
 
-            var basketCalculator = new BasketCalculator();
+            var cost = _basketCalculator.GetCostOfBasket(basket);
 
-            var cost = basketCalculator.GetCostOfBasket(basket);
             cost.Should().Be(11.20m);
         }
 
@@ -114,10 +108,9 @@ namespace CustomerBasket.Tests.Services
             basket.AddToBasket(_testBread);
             basket.AddToBasket(_testMilk);
             basket.AddToBasket(_testButter);
+            
+            var cost = _basketCalculator.GetCostOfBasket(basket);
 
-            var basketCalculator = new BasketCalculator();
-
-            var cost = basketCalculator.GetCostOfBasket(basket);
             cost.Should().Be(2.95m);
         }
     }

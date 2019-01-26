@@ -12,9 +12,7 @@ namespace CustomerBasket.Tests.Services
     [TestFixture]
     public class FreeMilkDiscountTests
     {
-        private Product _testButter;
         private Product _testMilk;
-        private Product _testBread;
         private FreeMilkDiscount _freeMilkDiscount;
 
 
@@ -22,13 +20,6 @@ namespace CustomerBasket.Tests.Services
         public void Setup()
         {
             _freeMilkDiscount = new FreeMilkDiscount();
-            _testButter = new Product
-            {
-                Id = 1,
-                Name = "Butter",
-                DiscountTag = DiscountTag.Butter,
-                Price = 0.80m
-            };
             _testMilk = new Product
             {
                 Id = 2,
@@ -36,13 +27,20 @@ namespace CustomerBasket.Tests.Services
                 DiscountTag = DiscountTag.Milk,
                 Price = 1.15m
             };
-            _testBread = new Product
-            {
-                Id = 3,
-                Name = "Bread",
-                DiscountTag = DiscountTag.Bread,
-                Price = 1.00m
-            };
+        }
+
+        [Test]
+        public void Null_Basket_Returns_0()
+        {
+            var discount = _freeMilkDiscount.ApplyDiscount(null);
+            discount.Should().Be(0);
+        }
+
+        [Test]
+        public void Empty_Basket_Returns_0()
+        {
+            var discount = _freeMilkDiscount.ApplyDiscount(new Basket());
+            discount.Should().Be(0);
         }
 
         [TestCase(0)]

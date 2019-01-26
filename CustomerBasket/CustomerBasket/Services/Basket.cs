@@ -19,10 +19,11 @@ namespace CustomerBasket.Services
 
         public void AddToBasket(Product product, int quantity = 1)
         {
-            if (quantity < 1)
-            {
+            if (product == null)
                 return;
-            }          
+
+            if (quantity < 1)
+                return;         
 
             if (_products.TryGetValue(product.Id, out BasketProduct basketProduct))
             {
